@@ -1,0 +1,112 @@
+export const CATEGORIES = ["All", "Articles", "Whitepapers", "Case Studies", "Strategy Papers", "News & Media", "Videos", "Newsletter"];
+
+export const MOCK_PRODUCTS = [
+  {
+    id: 1,
+    title: "State-led Urban Digital Transformation",
+    category: "Case Studies",
+    image: "https://placehold.co/400x240/0b4ea2/ffffff?text=Urban+Digital",
+    tag: "eGov Foundation",
+    date: "15 Mar 2025",
+    states: ["Odisha", "Kerala", "Andhra Pradesh"],
+    domain: "Local Governance",
+    price: "Free",
+    description: "How state governments are leading digital transformation in urban local bodies across India."
+  },
+  {
+    id: 2,
+    title: "DOT – A DIGIT Quarterly Newsletter",
+    category: "Newsletter",
+    image: "https://placehold.co/400x240/3b82f6/ffffff?text=DOT+Newsletter",
+    tag: "eGov Foundation",
+    date: "20 Jan 2025",
+    states: ["Pan India"],
+    domain: "Technology",
+    price: "Free",
+    description: "The DIGIT Open Technology quarterly newsletter covering latest platform updates and success stories."
+  },
+  {
+    id: 3,
+    title: "DOT 2025: Top Stories of Partnerships & Impact",
+    category: "Articles",
+    image: "https://placehold.co/400x240/f59e0b/1f2937?text=DOT+2025",
+    tag: "eGov Foundation",
+    date: "30 Dec 2025",
+    states: ["Pan India"],
+    domain: "Partnerships",
+    price: "Free",
+    description: "A year in review – top stories of partnerships, impact and transformation powered by DIGIT."
+  },
+  {
+    id: 4,
+    title: "Digital Public Infrastructure for Health",
+    category: "Whitepapers",
+    image: "https://placehold.co/400x240/10b981/ffffff?text=Health+DPI",
+    tag: "eGov Foundation",
+    date: "12 Nov 2024",
+    states: ["Maharashtra", "Tamil Nadu"],
+    domain: "Public Health",
+    price: "Free",
+    description: "Building scalable digital public infrastructure for health service delivery at scale."
+  },
+  {
+    id: 5,
+    title: "Water & Sanitation Governance Reforms",
+    category: "Strategy Papers",
+    image: "https://placehold.co/400x240/06b6d4/ffffff?text=Water+Sanitation",
+    tag: "eGov Foundation",
+    date: "05 Oct 2024",
+    states: ["Rajasthan", "UP", "Bihar"],
+    domain: "Water & Sanitation",
+    price: "Free",
+    description: "Leveraging technology and governance reforms to improve water and sanitation delivery."
+  },
+  {
+    id: 6,
+    title: "Open Source in Government: DIGIT Case Study",
+    category: "Case Studies",
+    image: "https://placehold.co/400x240/8b5cf6/ffffff?text=Open+Source+Gov",
+    tag: "eGov Foundation",
+    date: "18 Sep 2024",
+    states: ["Uttarakhand", "Punjab"],
+    domain: "Technology",
+    price: "Free",
+    description: "How open source DIGIT platform is transforming citizen service delivery across Indian states."
+  },
+  {
+    id: 7,
+    title: "Public Finance Management Digital Stack",
+    category: "Whitepapers",
+    image: "https://placehold.co/400x240/ef4444/ffffff?text=Finance+Stack",
+    tag: "eGov Foundation",
+    date: "22 Aug 2024",
+    states: ["Karnataka", "Gujarat"],
+    domain: "Public Finance",
+    price: "Free",
+    description: "A comprehensive digital stack for modernizing public finance management in state governments."
+  },
+  {
+    id: 8,
+    title: "eGov Impact Report 2024",
+    category: "Articles",
+    image: "https://placehold.co/400x240/f97316/ffffff?text=Impact+Report",
+    tag: "eGov Foundation",
+    date: "10 Jul 2024",
+    states: ["Pan India"],
+    domain: "Impact",
+    price: "Free",
+    description: "Annual impact report highlighting 1.1 billion+ public services delivered through the DIGIT platform."
+  },
+  {
+    id: 9,
+    title: "Smart Cities: Learnings from DIGIT Deployments",
+    category: "Videos",
+    image: "https://placehold.co/400x240/ec4899/ffffff?text=Smart+Cities",
+    tag: "eGov Foundation",
+    date: "03 Jun 2024",
+    states: ["Multiple States"],
+    domain: "Local Governance",
+    price: "Free",
+    description: "Video series documenting real-world learnings from DIGIT platform deployments in smart cities."
+  }
+];
