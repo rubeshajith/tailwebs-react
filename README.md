@@ -36,6 +36,9 @@ egov-landing/
 │   │   ├── Skeleton/        # Shimmer skeleton loader
 │   │   ├── Supporters/      # Supporters logos
 │   │   └── Footer/          # Full footer with subscribe form
+│   ├── hooks/
+│   │   ├── useDebounce.js         # deboounce for seacrch query
+│   │   └── useLocalStorage.js     # localStorage of category state if reload is applied
 │   ├── store/
 │   │   ├── index.js         # Redux store configuration
 │   │   └── slices/
