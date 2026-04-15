@@ -1,6 +1,6 @@
 # eGov Foundation — Landing Page (React + Redux)
 
-A production-grade React landing page recreation of [egov.org.in](https://egov.org.in), built for **Task 2** of the Tailwebs assessment.
+A production-grade React landing page recreation, built for **Task 2** of the Tailwebs assessment.
 
 ---
 
