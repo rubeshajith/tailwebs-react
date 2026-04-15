@@ -13,11 +13,14 @@ const DIGIT = () => {
           <p className="digit__sub">Our open source</p>
           <h2 className="digit__heading">technology-for-good platform</h2>
           <p className="digit__desc">
-            DIGIT, short for Digital Infrastructure for Governance, Inclusion and Transformation is eGov's
-            open-source platform with reusable building blocks and shared data registries that can be used
-            to build solutions in multiple sectors.
+            DIGIT, short for Digital Infrastructure for Governance, Inclusion
+            and Transformation is eGov's open-source platform with reusable
+            building blocks and shared data registries that can be used to build
+            solutions in multiple sectors.
           </p>
-          <a href="#" className="btn btn--orange">Explore the platform →</a>
+          <a href="#" className="btn btn--orange">
+            Explore the platform →
+          </a>
         </div>
 
         <div className="digit__visual">
@@ -26,9 +29,9 @@ const DIGIT = () => {
             alt="DIGIT Platform"
             className="digit__img"
           />
-          <div className="digit__pill digit__pill--1">Open Source</div>
+          {/* <div className="digit__pill digit__pill--1">Open Source</div>
           <div className="digit__pill digit__pill--2">Scalable</div>
-          <div className="digit__pill digit__pill--3">Interoperable</div>
+          <div className="digit__pill digit__pill--3">Interoperable</div> */}
         </div>
       </div>
     </section>

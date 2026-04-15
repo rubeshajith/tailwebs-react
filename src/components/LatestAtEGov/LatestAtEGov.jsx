@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProducts,
   setSearchQuery,
   setActiveCategory,
-  selectFilteredProducts,
+  selectAllProducts,
   selectProductsStatus,
   selectSearchQuery,
   selectActiveCategory,
@@ -12,14 +12,39 @@ import {
 import { CATEGORIES } from "../../data/mockData";
 import Skeleton from "../Skeleton/Skeleton";
 import ProductCard from "./ProductCard";
+import useDebounce from "../../hooks/useDebounce";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import "./LatestAtEGov.css";
 
 const LatestAtEGov = () => {
   const dispatch = useDispatch();
-  const products = useSelector(selectFilteredProducts);
+  const allProducts = useSelector(selectAllProducts);
   const status = useSelector(selectProductsStatus);
   const searchQuery = useSelector(selectSearchQuery);
   const activeCategory = useSelector(selectActiveCategory);
+
+  // local input state so the field feels instant while debounce runs in background
+  const [inputValue, setInputValue] = useState(searchQuery);
+  const debouncedSearch = useDebounce(inputValue, 300);
+
+  // persist the active category across page refreshes
+  const [savedCategory, setSavedCategory] = useLocalStorage(
+    "egov_active_category",
+    "All",
+  );
+
+  // sync debounced value into Redux (not on every keypress)
+  useEffect(() => {
+    dispatch(setSearchQuery(debouncedSearch));
+  }, [debouncedSearch, dispatch]);
+
+  // restore saved category from localStorage on first mount
+
+  useEffect(() => {
+    if (savedCategory && savedCategory !== activeCategory) {
+      dispatch(setActiveCategory(savedCategory));
+    }
+  }, []); // intentionally empty — we only want this to run once on mount
 
   useEffect(() => {
     if (status === "idle") {
@@ -27,8 +52,27 @@ const LatestAtEGov = () => {
     }
   }, [status, dispatch]);
 
-  const handleSearch = (e) => dispatch(setSearchQuery(e.target.value));
-  const handleCategory = (cat) => dispatch(setActiveCategory(cat));
+  const handleSearch = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleCategory = (cat) => {
+    dispatch(setActiveCategory(cat));
+    setSavedCategory(cat); // persist for next visit
+  };
+
+  // useMemo so filtering only re-runs when the actual dependencies change,
+  // not on every unrelated re-render
+  const filteredProducts = useMemo(() => {
+    return allProducts.filter((product) => {
+      const matchesSearch = product.title
+        .toLowerCase()
+        .includes(debouncedSearch.toLowerCase());
+      const matchesCategory =
+        activeCategory === "All" || product.category === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [allProducts, debouncedSearch, activeCategory]);
 
   return (
     <section className="latest">
@@ -59,14 +103,17 @@ const LatestAtEGov = () => {
             <input
               type="text"
               placeholder="Search articles, whitepapers, case studies..."
-              value={searchQuery}
+              value={inputValue}
               onChange={handleSearch}
               className="latest__search-input"
             />
-            {searchQuery && (
+            {inputValue && (
               <button
                 className="search-clear"
-                onClick={() => dispatch(setSearchQuery(""))}
+                onClick={() => {
+                  setInputValue("");
+                  dispatch(setSearchQuery(""));
+                }}
               >
                 ✕
               </button>
@@ -79,7 +126,9 @@ const LatestAtEGov = () => {
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
-              className={`latest__filter-btn ${activeCategory === cat ? "latest__filter-btn--active" : ""}`}
+              className={`latest__filter-btn ${
+                activeCategory === cat ? "latest__filter-btn--active" : ""
+              }`}
               onClick={() => handleCategory(cat)}
             >
               {cat}
@@ -91,21 +140,21 @@ const LatestAtEGov = () => {
         <div className="latest__content">
           {status === "loading" && <Skeleton count={6} />}
 
-          {status === "succeeded" && products.length > 0 && (
+          {status === "succeeded" && filteredProducts.length > 0 && (
             <div className="latest__grid">
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
           )}
 
-          {status === "succeeded" && products.length === 0 && (
+          {status === "succeeded" && filteredProducts.length === 0 && (
             <div className="latest__empty">
               <div className="latest__empty-icon">🔍</div>
               <h3 className="latest__empty-title">No results found</h3>
               <p className="latest__empty-desc">
-                No articles {searchQuery ? "match" : ""}{" "}
-                {searchQuery && <strong>"{searchQuery}"</strong>}
+                No articles {inputValue ? "match" : ""}{" "}
+                {inputValue && <strong>"{inputValue}"</strong>}
                 {activeCategory !== "All" && (
                   <>
                     {" "}
@@ -117,8 +166,10 @@ const LatestAtEGov = () => {
               <button
                 className="latest__reset-btn"
                 onClick={() => {
+                  setInputValue("");
                   dispatch(setSearchQuery(""));
                   dispatch(setActiveCategory("All"));
+                  setSavedCategory("All");
                 }}
               >
                 Clear filters
@@ -143,7 +194,7 @@ const LatestAtEGov = () => {
           )}
         </div>
 
-        {status === "succeeded" && products.length > 0 && (
+        {status === "succeeded" && filteredProducts.length > 0 && (
           <div className="latest__see-all">
             <a href="#" className="btn btn--outline-blue">
               See All →

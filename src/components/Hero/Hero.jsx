@@ -16,7 +16,7 @@ const Hero = () => {
             Catalysts. Ecosystem enablers. Problem Solvers. At eGov, we’re
             driven by the power of open digital infrastructure and ecosystems to
             enable governments deliver accessible, inclusive and transparent
-            services to every citizen.
+            services to every citizen
           </p>
           <div className="hero__ctas">
             <a href="#" className="btn btn--primary">
@@ -35,14 +35,14 @@ const Hero = () => {
               alt="Citizens and Government"
               className="hero__img"
             />
-            <div className="hero__badge hero__badge--1">
+            {/* <div className="hero__badge hero__badge--1">
               <span className="badge-num">1.1B+</span>
               <span className="badge-label">Services Delivered</span>
             </div>
             <div className="hero__badge hero__badge--2">
               <span className="badge-num">50+</span>
               <span className="badge-label">Partners</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

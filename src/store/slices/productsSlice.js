@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { MOCK_PRODUCTS } from "../../data/mockData";
 
 // Simulate async API call with delay
+// TODO: replace with real API endpoint once backend is ready
+// e.g. axios.get('/api/v1/egov/publications')
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
@@ -45,20 +47,7 @@ const productsSlice = createSlice({
 });
 
 export const { setSearchQuery, setActiveCategory } = productsSlice.actions;
-
-// Selectors
-export const selectFilteredProducts = (state) => {
-  const { items, searchQuery, activeCategory } = state.products;
-  return items.filter((product) => {
-    const matchesSearch = product?.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    const matchesCategory =
-      activeCategory === "All" || product?.category === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
-};
-
+export const selectAllProducts = (state) => state.products.items;
 export const selectProductsStatus = (state) => state.products.status;
 export const selectSearchQuery = (state) => state.products.searchQuery;
 export const selectActiveCategory = (state) => state.products.activeCategory;
